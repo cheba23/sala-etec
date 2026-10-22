@@ -2,7 +2,7 @@
 
 # Projeto 
 
-**Sala ETEC**
+**Sala ETEC melhorias**
 
 ## Nome da Empresa
 
