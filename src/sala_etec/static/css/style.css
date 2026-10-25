@@ -197,6 +197,13 @@ a:hover {
    FORMULÁRIOS
    ========================= */
 
+
+.material-description {
+    overflow-wrap: anywhere;
+    min-width: 0;
+    max-width: 100%;
+}
+
 .input,
 .textarea,
 .select select {
