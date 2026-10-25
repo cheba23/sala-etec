@@ -24,10 +24,24 @@ def arquivo_permitido(filename):
 def listar():
     busca = request.args.get("busca", "").strip()
 
+    consulta = (
+        Material.query
+        .join(Disciplina, Material.disciplina_id == Disciplina.id)
+        .join(Usuario, Material.professor_id == Usuario.id)
+    )
+
     if busca:
-        materiais = Material.query.filter(Material.titulo.ilike(f"%{busca}%")).all()
-    else:
-        materiais = Material.query.all()
+        termo = f"%{busca}%"
+
+        consulta = consulta.filter(
+            db.or_(
+                Material.titulo.ilike(termo),
+                Disciplina.nome.ilike(termo),
+                Usuario.nome.ilike(termo),
+            )
+        )
+
+    materiais = consulta.all()
 
     return render_template(
         "materiais/lista.html",
