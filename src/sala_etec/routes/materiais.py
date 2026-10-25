@@ -74,6 +74,16 @@ def adicionar():
     desc = request.form.get("desc", "").strip()
     disciplina_id = request.form.get("disciplina_id")
     professor_id = request.form.get("professor_id")
+    
+    # Validar quantidade de caracteres do título
+    if len(titulo) < 5 or len(titulo) > 99:
+        flash("O título deve ter entre 5 e 99 caracteres.", "danger")
+        return redirect(url_for("materiais.adicionar"))
+
+    # Validar quantidade de caracteres da descrição
+    if len(desc) < 10 or len(desc) > 199:
+        flash("A descrição deve ter entre 10 e 199 caracteres.", "danger")
+        return redirect(url_for("materiais.adicionar"))
 
     imagefile = request.files.get("imagem_id")
     new_image = "padrao.png"
